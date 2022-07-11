@@ -1,0 +1,121 @@
+{
+	"info": {
+		"_postman_id": "302b02cb-2697-4997-b6f1-17330cbc9e29",
+		"name": "test_upload",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4053723"
+	},
+	"item": [
+		{
+			"name": "upload",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBpcmVzSW50IjoiMWQiLCJkYXRhIjp7ImlkIjo1LCJ1c2VybmFtZSI6ImFkbWluIiwibmlja25hbWUiOiJhZG1pbiIsImZpcnN0bmFtZSI6Im51dHRhcG9uIiwibGFzdG5hbWUiOiJjaGFucGFuIiwiZW1haWwiOiJjaGFucGFuLm51dHRhcGhvbjE5OTNAZ21haWwuY29tIiwiYWRkcmVzcyI6IiIsImNyZWF0ZV9kYXRlIjoiMjAyMi0wMy0wMlQwMzowNzozMC4wMDBaIiwidXBkYXRlX2RhdGUiOm51bGwsInVzZXJfaW1nIjoiZnJvbnRfMjAyMjA1MTcxNzE4MzdyMXVjbS5qcGciLCJwZXJtaXNzaW9uIjoiYWRtaW4iLCJ1c2VyX3N0YXR1cyI6MSwibGFzdF9sb2dpbiI6bnVsbCwic29jaWFsX2lkIjpudWxsLCJwcm92aWRlciI6bnVsbCwiYmlydGhkYXkiOiIxOTkzLTA4LTA2VDE3OjAwOjAwLjAwMFoiLCJkaXNwbGF5X25hbWUiOm51bGwsImt4b191c2VyX2xldmVsIjpudWxsLCJwaG9uZSI6bnVsbH0sImlhdCI6MTY1NzUyMTQyN30.qcTNNqt0V3ZC0OqIQEjVXEV10dYP0zqIoCgyori0D0I",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "files",
+							"type": "file",
+							"src": "/Users/katexoxo/Downloads/db/11-610008.jpeg"
+						},
+						{
+							"key": "ref_id",
+							"value": "1234",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3004/api/v1/upload",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3004",
+					"path": [
+						"api",
+						"v1",
+						"upload"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-image-by-ref_id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3004/api/v1/upload/10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3004",
+					"path": [
+						"api",
+						"v1",
+						"upload",
+						"10"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-all",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3004/api/v1/upload",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3004",
+					"path": [
+						"api",
+						"v1",
+						"upload"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3004/api/v1/upload/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3004",
+					"path": [
+						"api",
+						"v1",
+						"upload",
+						"3"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
