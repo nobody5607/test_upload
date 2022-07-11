@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <form method="post" action="" enctype="multipart/form-data">
+      <input type="text" name="id" id="id" /><br />
+      <input type="file" id="files" name="files[]" multiple /><br />
+      <input type="button" id="submit" value="Upload" />
+    </form>
+    <!-- Preview -->
+    <div id="preview"></div>
+
+    <script>
+      $(function () {
+        function getImages() {
+          $.ajax({
+            url: "http://localhost:3004/api/v1/upload",
+            type: "get",
+            dataType: "json",
+            contentType: false,
+            processData: false,
+            success: function (result) {
+              if (result.status == "ok") {
+                let images = [];
+                for (let i of result.data) {
+                  images.push(i.image);
+                }
+
+                const myInterval = setInterval(myTimer, 500);
+                var index = 0;
+                function myTimer() {
+                  let item = images[Math.floor(Math.random() * images.length)];
+                  $("#preview").html("");
+                  $("#preview").html(
+                    '<img src="' + item + '" width="200px;" height="200px">'
+                  );
+                  index++;
+                  if (index == images.length * 2) {
+                    myStopFunction();
+                    console.log("success", images.length);
+                  }
+                }
+
+                function myStopFunction() {
+                  clearInterval(myInterval);
+                }
+              } else {
+                alert(result.message);
+              }
+            },
+          });
+        }
+        getImages();
+
+        $("#submit").click(function () {
+          var form_data = new FormData();
+          // Read selected files
+
+          form_data.append("ref_id", $("#id").val());
+
+          var totalfiles = document.getElementById("files").files.length;
+          for (var index = 0; index < totalfiles; index++) {
+            form_data.append(
+              "files" + index,
+              document.getElementById("files").files[index]
+            );
+          }
+
+          // AJAX request
+          $.ajax({
+            url: "http://localhost:3004/api/v1/upload",
+            type: "post",
+            data: form_data,
+            dataType: "json",
+            contentType: false,
+            processData: false,
+            success: function (result) {
+              if (result.status == "ok") {
+                for (let i of result.data) {
+                  $("#preview").append(
+                    '<img src="' + i + '" width="200px;" height="200px">'
+                  );
+                }
+              } else {
+                alert(result.message);
+              }
+            },
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
